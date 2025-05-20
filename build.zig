@@ -11,7 +11,6 @@ pub fn build(b: *std.Build) void {
     });
 
     lib_mod.addSystemIncludePath(b.path("include"));
-    lib_mod.addIncludePath(b.path("include"));
     lib_mod.addCSourceFile(.{
         .file = b.path("src/gl.c"),
     });
