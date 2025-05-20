@@ -21,5 +21,8 @@ pub fn build(b: *std.Build) void {
         .root_module = lib_mod,
     });
 
+    lib.installHeadersDirectory(b.path("include/glad"), "glad", .{});
+    lib.installHeadersDirectory(b.path("include/KHR"), "KHR", .{});
+
     b.installArtifact(lib);
 }
