@@ -1,0 +1,25 @@
+const std = @import("std");
+
+pub fn build(b: *std.Build) void {
+    const target = b.standardTargetOptions(.{});
+    const optimize = b.standardOptimizeOption(.{});
+
+    const lib_mod = b.createModule(.{
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+    });
+
+    lib_mod.addIncludePath(b.path("include"));
+    lib_mod.addCSourceFile(.{
+        .file = b.path("src/gl.c"),
+    });
+
+    const lib = b.addLibrary(.{
+        .linkage = .static,
+        .name = "glad",
+        .root_module = lib_mod,
+    });
+
+    b.installArtifact(lib);
+}
